@@ -1,0 +1,13 @@
+{{- if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") -}}
+#!/bin/sh
+
+# Install Rosetta 2"
+
+
+echo "Install Rosetta 2"
+
+set -eufo pipefail
+
+sudo softwareupdate --install-rosetta
+
+{{ end -}}

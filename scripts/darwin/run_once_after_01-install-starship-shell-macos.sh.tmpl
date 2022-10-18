@@ -1,0 +1,13 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/sh
+
+# Install zsh Shell via Homebrew
+
+echo "Install Starship Shell via Homebrew"
+set -eufo pipefail
+
+brew bundle --no-lock --file=/dev/stdin <<EOF || :
+brew "starship"
+EOF
+
+{{ end -}}
