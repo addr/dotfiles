@@ -12,7 +12,7 @@ com.apple.Finder:
 
 com.apple.driver.AppleBluetoothMultitouch.trackpad:
   Clicking: true
-
+  
 NSGlobalDomain:
   AppleShowAllExtensions: true
   KeyRepeat: 1
