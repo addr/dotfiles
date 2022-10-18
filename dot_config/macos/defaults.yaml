@@ -1,0 +1,27 @@
+com.apple.dock:
+  autohide: true
+  tilesize: 55
+  show-recents: false
+  min-effect: "scale"
+  mru-spaces: false
+  autohide-delay: 0
+
+com.apple.finder:
+  QuitMenuItem: true
+  AppleShowAllFiles: true
+
+com.apple.driver.AppleBluetoothMultitouch.trackpad:
+  Clicking: true
+
+NSGlobalDomain:
+  AppleShowAllExtensions: true
+  KeyRepeat: 1
+  InitialKeyRepeat: 10
+  AppleShowScrollBars: "Always"
+  NSNavPanelExpandedStateForSaveMode: true
+  NSNavPanelExpandedStateForSaveMode2: true
+  com.apple.mouse.tapBehavior: 1
+  _HIHideMenuBar: true
+
+com.apple.menuextra.clock:
+  DateFormat: "EEE d MMM HH:mm:ss"
