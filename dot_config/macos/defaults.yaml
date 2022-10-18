@@ -22,7 +22,9 @@ NSGlobalDomain:
   NSNavPanelExpandedStateForSaveMode: true
   NSNavPanelExpandedStateForSaveMode2: true
   com.apple.mouse.tapBehavior: 1
+  com.apple.mouse.scaling: 1.5
   _HIHideMenuBar: true
 
 com.apple.menuextra.clock:
   DateFormat: "EEE d MMM HH:mm:ss"
+
