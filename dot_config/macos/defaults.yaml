@@ -18,6 +18,7 @@ NSGlobalDomain:
   KeyRepeat: 1
   InitialKeyRepeat: 10
   AppleShowScrollBars: "Always"
+  ApplePressAndHoldEnabled: true
   NSNavPanelExpandedStateForSaveMode: true
   NSNavPanelExpandedStateForSaveMode2: true
   com.apple.mouse.tapBehavior: 1
