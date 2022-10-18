@@ -6,7 +6,7 @@ com.apple.dock:
   mru-spaces: false
   autohide-delay: 0
 
-com.apple.finder:
+com.apple.Finder:
   QuitMenuItem: true
   AppleShowAllFiles: true
 
