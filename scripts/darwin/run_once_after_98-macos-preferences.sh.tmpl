@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+{{- if (eq .chezmoi.os "darwin") -}}
 
 apply-user-defaults ~/.config/macos/defaults.yaml --verbose
 
@@ -23,3 +24,5 @@ defaults write -globalDomain NSU
   -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 49" \
   -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 1572864" \
   -c "Add :AppleSymbolicHotKeys:65:type string standard"
+
+{{ end -}}
