@@ -17,6 +17,9 @@ wget https://starship.rs/install.sh && chmod +x ./install.sh && ./install.sh -y
 
 echo "eval \"\$(starship init bash)\"" >> ~/.bashrc
 
+# Install direnv
+echo "eval \"\$(direnv hook bash)\"" >> ~/.bashrc
+
 # Install oh-my-zsh
 if [ ! -d "${HOME}/.oh-my-zsh" ]; then
     git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
