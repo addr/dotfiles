@@ -36,15 +36,21 @@
 	ignorecase   = false
 	safecrlf     = warn
 	abbrev       = 7
-	editor       = emacs
+	editor       = code --wait
 
 [diff]
-	tool = ediff
+	tool = vscode
 	submodule = log
 
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
 [merge]
-	tool = ediff
+	tool = vscode
 	strategy = recursive
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
 
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFXS

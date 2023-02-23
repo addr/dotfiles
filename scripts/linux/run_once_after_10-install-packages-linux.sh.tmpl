@@ -1,0 +1,14 @@
+#!/bin/sh
+
+{{- if eq .chezmoi.osRelease.name "Ubuntu" }}
+# Install common apt packages
+{{- range .ubuntu }}
+sudo apt install -y {{ . }}
+{{- end }}
+
+# Install other packages not in apt
+
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2
+{{- end }}
+
+

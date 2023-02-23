@@ -1,0 +1,37 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/sh
+
+# Install asdf plugins
+
+echo "Install asdf plugins"
+
+{{ $plugins := dict
+  "nodejs"     "lts-gallium"
+  "pnpm"       "6.23.3"
+  "golang" "latest"
+  "yarn"       "1.22.17"
+  "direnv"     "latest"
+  "terraform"  "latest"
+  "terragrunt" "latest"
+  "python" "latest"
+}}
+
+# Skip Node.js signature check
+export NODEJS_CHECK_SIGNATURES=no
+
+# Add plugins & install versions
+{{ range (keys $plugins) -}}
+  {{- $key := . }}
+  {{- $val := get $plugins $key }}
+
+  asdf plugin-add {{ $key }} || true
+
+  {{- if not (eq $val "None") }}
+    asdf install {{ $key }} {{ $val }} || true
+    asdf global {{ $key }} {{ $val }} || true
+  {{- end -}}
+{{ end -}}
+
+asdf reshim
+
+{{ end -}}

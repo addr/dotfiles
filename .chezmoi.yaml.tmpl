@@ -1,3 +1,5 @@
+{{- $codespaces:= env "CODESPACES" | not | not -}}
+
 {{- $name := "Andy Rice" -}}
 {{- $email := "andydrice@gmail.com" -}}
 {{- $github_user := "addr" -}}
@@ -5,12 +7,14 @@
 {{- $computer_name := default "andyrice-computer-name" (env "CM_computer_name") -}}
 {{- $hostname := default "andyrice" (env "CM_hostname") -}}
 
+{{- if not $codespaces }}
 {{-   $computer_name = promptString "Computer Name" $computer_name -}}
 {{-   $hostname = promptString "Hostname" $hostname -}}
 {{-   $name = promptString "Full Name" $name -}}
 {{-   $email = promptString "Email" $email -}}
 {{-   $github_user = promptString "GitHub Username" $github_user -}}
 {{-   $asdf_version = promptString "Asdf Version" $asdf_version -}}
+{{- end }}
 
 data:
   name: {{ $name | quote }}
