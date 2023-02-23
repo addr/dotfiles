@@ -15,7 +15,7 @@ fc-cache -fv
 # Install Starship prompt 
 wget https://starship.rs/install.sh && chmod +x ./install.sh && ./install.sh -y
 
-echo "eval "$(starship init bash)"" >> ~/.bashrc
+echo "eval \"\$(starship init bash)\"" >> ~/.bashrc
 
 # Install oh-my-zsh
 if [ ! -d "${HOME}/.oh-my-zsh" ]; then
