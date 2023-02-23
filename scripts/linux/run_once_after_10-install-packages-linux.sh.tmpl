@@ -1,14 +1,40 @@
-#!/bin/sh
+#!/bin/bash
 
 {{- if eq .chezmoi.osRelease.name "Ubuntu" }}
+{{ $apts := list
+    "direnv"
+    "make"
+    "vim"
+    "build-essential"
+    "libssl-dev"
+    "zlib1g-dev"
+    "libbz2-dev"
+    "libreadline-dev"
+    "libsqlite3-dev"
+    "wget"
+    "curl"
+    "llvm"
+    "libncursesw5-dev"
+    "xz-utils"
+    "tk-dev"
+    "libxml2-dev"
+    "libxmlsec1-dev"
+    "libffi-dev"
+    "liblzma-dev"
+-}}
 # Install common apt packages
-{{- range .ubuntu }}
-sudo apt install -y {{ . }}
-{{- end }}
+{{ range ($apts | sortAlpha | uniq) -}}
+sudo apt install -y "{{ . }}"
+{{ end }}
 
 # Install other packages not in apt
+ASDF_DIR=~/.asdf
 
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2
+if [ ! -d "$ASDF_DIR" ] ; then
+    git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.11.2
+fi
+echo ". "$HOME/.asdf/asdf.sh"" >> ~/.bashrc
+source ~/.bashrc
 {{- end }}
 
 
