@@ -2,11 +2,12 @@ name: Smoke Test CI
 
 on: [push]
 
+env:
+  CI: true
+
 jobs:
   build:
-
-    runs-on: macOS-latest
-    
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
     - name: Execute full install
