@@ -4,8 +4,8 @@
 # -u: exit on unset variables
 set -eu
 
-apt update
-apt install -y curl git sudo
+# apt update
+# apt install -y curl git sudo
 
 if ! chezmoi="$(command -v chezmoi)"; then
   bin_dir="${HOME}/.local/bin"
