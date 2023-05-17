@@ -25,7 +25,7 @@
 -}}
 # Install common apt packages
 {{ range ($apts | sortAlpha | uniq) -}}
-sudo apt install -y "{{ . }}"
+DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC sudo apt install -y "{{ . }}"
 {{ end }}
 
 # Install other packages not in apt
