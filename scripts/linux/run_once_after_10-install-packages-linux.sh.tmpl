@@ -34,7 +34,9 @@ ASDF_DIR=~/.asdf
 if [ ! -d "$ASDF_DIR" ] ; then
     git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.11.2
 fi
-echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+echo ". $HOME/.asdf/asdf.sh" >> $HOME/.bashrc
+
+source $HOME/.bashrc
 {{- end }}
 
 
