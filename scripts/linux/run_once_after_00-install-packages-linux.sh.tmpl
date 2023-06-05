@@ -25,17 +25,21 @@
 -}}
 # Install common apt packages
 {{ range ($apts | sortAlpha | uniq) -}}
-sudo apt install -y "{{ . }}"
+DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC sudo apt install -y "{{ . }}"
 {{ end }}
 
 # Install other packages not in apt
-ASDF_DIR=~/.asdf
+ASDF_DIR=$HOME/.asdf
 
 if [ ! -d "$ASDF_DIR" ] ; then
-    git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.11.2
+    git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.11.3
 fi
-echo ". "$HOME/.asdf/asdf.sh"" >> ~/.bashrc
-source ~/.bashrc
+
+echo -e "\n. $HOME/.asdf/asdf.sh" >> ~/.bashrc
+echo -e "\n. $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+. $HOME/.asdf/asdf.sh
+
+# source $HOME/.bashrc
 {{- end }}
 
 
