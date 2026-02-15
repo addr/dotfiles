@@ -1,0 +1,55 @@
+# --- Path ---
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# --- Zinit Bootstrap ---
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ ! -d "$ZINIT_HOME" ]]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+# --- Prompt ---
+eval "$(starship init zsh)"
+
+# --- Plugins (turbo-loaded, deferred) ---
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-history-substring-search
+
+# --- Completions ---
+zinit ice wait lucid blockf atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
+
+# --- Tool Integrations ---
+eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
+eval "$(atuin init zsh)"
+
+# --- History ---
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt SHARE_HISTORY
+
+# --- Keybindings (vi-mode) ---
+bindkey -v
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# --- Aliases ---
+alias ls="eza --icons"
+alias ll="eza -la --icons --git"
+alias lt="eza --tree --icons"
+alias cat="bat"
+alias lg="lazygit"
+alias cd="z"
+
+# --- Local overrides ---
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
