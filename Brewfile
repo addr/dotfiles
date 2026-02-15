@@ -19,6 +19,7 @@ brew "jq"
 brew "gh"
 brew "tmux"
 brew "neovim"
+brew "direnv"
 brew "pre-commit"
 brew "git"
 
