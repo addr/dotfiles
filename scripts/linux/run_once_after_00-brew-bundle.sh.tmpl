@@ -1,6 +1,7 @@
 {{- if and (eq .chezmoi.os "linux") (not (env "CI")) -}}
 #!/bin/bash
 set -euo pipefail
+trap '' HUP
 
 # Install build dependencies (needed for Homebrew on Linux)
 if command -v apt &>/dev/null; then
