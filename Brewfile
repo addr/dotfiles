@@ -1,7 +1,6 @@
 # Brewfile
 
 # --- Taps ---
-tap "homebrew/bundle"
 tap "nikitabobko/tap"
 
 # --- Core CLI Tools ---
