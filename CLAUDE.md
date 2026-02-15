@@ -1,6 +1,6 @@
 # Dotfiles
 
-Chezmoi-managed personal dotfiles for macOS (primary) and Ubuntu Linux. Currently undergoing modernization.
+Chezmoi-managed personal dotfiles for macOS (primary) and Ubuntu Linux.
 
 ## Quick Reference
 
@@ -10,6 +10,7 @@ chezmoi diff                   # Preview changes before applying
 chezmoi edit <file>            # Edit a managed file
 chezmoi add <file>             # Add a new file to management
 chezmoi init --apply           # First-time setup (runs install scripts)
+brew bundle --file=Brewfile    # Install all packages
 ./install.sh                   # Bootstrap from scratch
 ./test.sh                      # Docker smoke test (Ubuntu)
 ```
@@ -17,31 +18,42 @@ chezmoi init --apply           # First-time setup (runs install scripts)
 ## Project Structure
 
 ```
-├── .chezmoi.yaml.tmpl         # Template variables (name, email, github, etc.)
-├── install.sh                 # Bootstrap entrypoint
-├── test.sh                    # Docker-based Ubuntu smoke test
-├── scripts/
-│   ├── darwin/                # macOS run_once_after_* install scripts
-│   └── linux/                 # Linux run_once_after_* install scripts
-├── dot_config/
-│   ├── macos/defaults.yaml    # macOS system preferences
-│   └── nvim/init.vim          # Neovim config
-├── dot_doom.d/                # Doom Emacs (placeholder)
-├── dot_zshrc                  # Zsh config (Oh-My-Zsh + Starship)
-├── dot_gitconfig.tmpl         # Git config (templated)
-├── dot_tool-versions          # ASDF language versions
-├── executable_dot_yabairc     # Yabai tiling WM
-└── dot_skhdrc                 # SKHD hotkeys
+.chezmoi.yaml.tmpl              # Template variables (name, email, github, etc.)
+.chezmoiignore                  # Files to skip per OS
+install.sh                      # Bootstrap entrypoint
+test.sh                         # Docker-based Ubuntu smoke test
+
+Brewfile                        # All packages — single file, OS conditionals
+
+scripts/
+  darwin/
+    run_once_after_00-brew-bundle.sh.tmpl   # brew bundle
+    run_once_after_01-macos-defaults.sh.tmpl # macOS system preferences
+    run_once_after_99-macos-name.zsh.tmpl   # Set computer name/hostname
+  linux/
+    run_once_after_00-brew-bundle.sh.tmpl   # install brew + brew bundle
+
+dot_config/
+  aerospace/aerospace.toml      # AeroSpace tiling WM (macOS)
+  ghostty/config                # Ghostty terminal
+  nvim/                         # AstroNvim (lazy.nvim) config
+  starship.toml                 # Starship prompt
+  mise/config.toml              # mise global config (versions + env)
+  atuin/config.toml             # Shell history sync
+
+dot_zshrc.tmpl                  # Zsh config (Zinit-based)
+dot_gitconfig.tmpl              # Git config (delta pager)
 ```
 
 ## Configuration Flow
 
-1. `install.sh` installs chezmoi and runs `chezmoi init --apply`
-2. `.chezmoi.yaml.tmpl` prompts for template variables (skipped in CI/Codespaces)
-3. `dot_*` files deploy to `$HOME` with the `dot_` prefix replaced by `.`
-4. `.tmpl` files are rendered through chezmoi's template engine first
-5. `scripts/{darwin,linux}/run_once_after_*` execute in numbered order (00→99)
-6. `*.local` files (`~/.zshrc.local`, `~/.gitconfig.local`) provide per-machine overrides
+1. `install.sh` installs Homebrew (if missing) and chezmoi
+2. `chezmoi init --apply` prompts for template variables, deploys all dot_* files
+3. `run_once_after_00-brew-bundle.sh` runs `brew bundle` to install all packages
+4. `run_once_after_01-macos-defaults.sh` sets macOS system preferences (macOS only)
+5. Zinit auto-installs plugins on first shell launch
+6. mise installs language versions on first `mise install`
+7. `*.local` files (`~/.zshrc.local`, `~/.gitconfig.local`) provide per-machine overrides
 
 ## Template Variables
 
@@ -50,7 +62,6 @@ chezmoi init --apply           # First-time setup (runs install scripts)
 | `name` | Andy Rice | gitconfig |
 | `email` | andydrice@gmail.com | gitconfig |
 | `github_user` | addr | — |
-| `asdf_version` | 0.9.0 | install scripts |
 | `computer_name` | andyrice-computer-name | macOS naming |
 | `hostname` | andyrice | macOS naming |
 
@@ -58,25 +69,26 @@ chezmoi init --apply           # First-time setup (runs install scripts)
 
 | Tool | Config | Notes |
 |------|--------|-------|
-| Zsh + Oh-My-Zsh | `dot_zshrc` | Starship prompt, vi-mode, many plugins |
-| Git | `dot_gitconfig.tmpl` | VS Code diff/merge, diff-so-fancy pager |
-| Neovim | `dot_config/nvim/init.vim` | Minimal config |
-| Yabai | `executable_dot_yabairc` | BSP tiling, macOS only |
-| SKHD | `dot_skhdrc` | Alt+hjkl nav, macOS only |
-| ASDF | `dot_tool-versions`, `dot_asdfrc` | Node, Python, Go, Terraform, PHP |
-| Doom Emacs | `dot_doom.d/` | Placeholder only |
+| Zsh + Zinit | `dot_zshrc.tmpl` | Starship prompt, vi-mode, turbo-loaded plugins |
+| Git + delta | `dot_gitconfig.tmpl` | Side-by-side diffs, zdiff3 merge conflicts |
+| Neovim | `dot_config/nvim/` | AstroNvim v5 + lazy.nvim |
+| AeroSpace | `dot_config/aerospace/` | i3-like tiling, alt+hjkl, macOS only |
+| Ghostty | `dot_config/ghostty/` | Terminal emulator |
+| mise | `dot_config/mise/` | Version manager + env vars (replaces asdf+direnv) |
+| Atuin | `dot_config/atuin/` | Shell history with fuzzy search |
+| Starship | `dot_config/starship.toml` | Cross-shell prompt |
 
 ## Important Constraints
 
 - **Chezmoi owns `$HOME` dotfiles** — edit source files here, never `~/.zshrc` directly
-- **`run_once_after_*` scripts are idempotent** — chezmoi tracks execution; they only run once per content hash
+- **`run_once_after_*` scripts are idempotent** — chezmoi tracks execution by content hash
 - **Template files require `chezmoi apply`** — direct edits to rendered files are overwritten
+- **Brewfile is the package source of truth** — add/remove packages there, not in install scripts
 - **macOS scripts assume Homebrew** — it's installed in step 00 before anything else
-- **ASDF version is pinned** (0.9.0) — update `.chezmoi.yaml.tmpl` to change it
 - **Git config uses VS Code** as diff/merge tool — requires VS Code `code` CLI in PATH
+- **AeroSpace replaces Yabai+SKHD** — no SIP disable needed, built-in hotkeys
 
 ## Git Workflow
 
 - Single `master` branch
-- No specific commit convention currently enforced
 - CI runs Ubuntu smoke test via Docker on push
