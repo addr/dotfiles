@@ -1,0 +1,11 @@
+# Global workmux defaults (project configs override these)
+
+nerdfont: true
+merge_strategy: rebase
+agent: claude
+
+# Default pane layout: agent + shell
+panes:
+  - command: <agent>
+    focus: true
+  - split: horizontal

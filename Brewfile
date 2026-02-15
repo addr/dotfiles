@@ -2,6 +2,7 @@
 
 # --- Taps ---
 tap "nikitabobko/tap"
+tap "raine/workmux"
 
 # --- Core CLI Tools ---
 brew "bat"
@@ -20,6 +21,7 @@ brew "gh"
 brew "tmux"
 brew "neovim"
 brew "direnv"
+brew "workmux"
 brew "pre-commit"
 brew "git"
 
