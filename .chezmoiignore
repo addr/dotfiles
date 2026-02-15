@@ -1,1 +1,7 @@
 install.sh
+test.sh
+Brewfile
+docs/
+CLAUDE.md
+.github/
+README.md
