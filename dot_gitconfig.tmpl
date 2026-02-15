@@ -1,71 +1,44 @@
-# https://git-scm.com/docs/git-config
-[apply]
-	whitespace = nowarn
-
-[color]
-	ui = true
-
-[color "branch"]
-  	current = white bold
-	local   = yellow
-	remote  = cyan
-
-[color "diff"]
-  	frag = cyan bold
-	meta = white
-	new = green bold
-	old = red bold
-	commit = yellow bold
-	whitespace = red reverse
-
-[color "diff-highlight"]
-  	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-
-[color "status"]
-	untracked = cyan
-
-[commit]
-	template = ~/.gitmessage
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
 
 [core]
-  	autocrlf     = input
+	autocrlf = input
 	excludesfile = ~/.gitignore_global
-	ignorecase   = false
-	safecrlf     = warn
-	abbrev       = 7
-	editor       = code --wait
+	ignorecase = false
+	editor = code --wait
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
 
 [diff]
 	tool = vscode
-	submodule = log
+	colorMoved = default
 
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 
 [merge]
 	tool = vscode
-	strategy = recursive
+	conflictstyle = zdiff3
 
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 
-[pager]
-	diff = diff-so-fancy | less --tabs=4 -RFXS
-	log = less -+X
-
 [pull]
 	ff = only
+
 [fetch]
 	prune = true
 
+[commit]
+	template = ~/.gitmessage
+
 [include]
 	path = ~/.gitconfig.local
-
-[user]
-	name = {{ .name }}
-	email = {{ .email }}
-
-
