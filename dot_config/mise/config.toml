@@ -1,0 +1,7 @@
+[tools]
+node = "lts"
+python = "3.13"
+go = "latest"
+
+[settings]
+experimental = true

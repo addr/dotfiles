@@ -1,0 +1,6 @@
+dialect = "us"
+style = "compact"
+inline_height = 20
+show_preview = true
+filter_mode = "global"
+search_mode = "fuzzy"
