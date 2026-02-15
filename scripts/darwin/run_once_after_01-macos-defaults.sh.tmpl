@@ -1,4 +1,4 @@
-{{- if (eq .chezmoi.os "darwin") -}}
+{{- if and (eq .chezmoi.os "darwin") (not (env "CI")) -}}
 #!/usr/bin/env bash
 apply-user-defaults ~/.config/macos/defaults.yaml --verbose
 
