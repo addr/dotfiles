@@ -1,9 +1,9 @@
 {{- $codespaces:= env "CODESPACES" | not | not -}}
 {{- $ci:= env "CI" | not | not -}}
 
-{{- $name := "Andy Rice" -}}
-{{- $email := "andydrice@gmail.com" -}}
-{{- $github_user := "addr" -}}
+{{- $name := default "Andy Rice" (env "CM_name") -}}
+{{- $email := default "andydrice@gmail.com" (env "CM_email") -}}
+{{- $github_user := default "addr" (env "CM_github_user") -}}
 {{- $computer_name := default "andyrice-computer-name" (env "CM_computer_name") -}}
 {{- $hostname := default "andyrice" (env "CM_hostname") -}}
 
