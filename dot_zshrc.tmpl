@@ -12,31 +12,28 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 {{- end }}
 
-# --- Zinit Bootstrap ---
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [[ ! -d "$ZINIT_HOME" ]]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# --- Antidote Bootstrap ---
+if [[ ! -d ${ZDOTDIR:-~}/.antidote ]]; then
+  git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 fi
-source "${ZINIT_HOME}/zinit.zsh"
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+
+# --- Plugins ---
+antidote load <<'PLUGINS'
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+PLUGINS
 
 # --- Prompt ---
 eval "$(starship init zsh)"
 
-# --- Plugins (turbo-loaded, deferred) ---
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-history-substring-search
-
-# --- Completions ---
-zinit ice wait lucid blockf atpull'zinit creinstall -q .'
-zinit light zsh-users/zsh-completions
-
 # --- Tool Integrations ---
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
-eval "$(atuin init zsh)"
+eval "$(fzf --zsh)"              # Ctrl-T (files), Alt-C (cd)
+eval "$(atuin init zsh)"         # Ctrl-R (history) — must be after fzf to take precedence
 eval "$(direnv hook zsh)"
 
 # --- History ---
