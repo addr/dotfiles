@@ -24,6 +24,17 @@ brew "direnv"
 brew "workmux"
 brew "pre-commit"
 brew "git"
+brew "difftastic"     # AST-aware structural diffs
+brew "ast-grep"       # Structural code search/rewrite
+brew "git-absorb"     # Auto fixup commits for rebase
+brew "gitleaks"       # Secret scanning (pre-commit hook)
+brew "hurl"           # Declarative HTTP testing
+brew "btop"           # System/process monitor TUI
+brew "shellcheck"     # Shell script linter
+brew "dust"           # Disk usage visualization
+brew "lazydocker"     # Docker TUI
+brew "croc"           # P2P encrypted file transfer
+brew "uv"             # Python package manager
 
 # --- macOS Only ---
 if OS.mac?
