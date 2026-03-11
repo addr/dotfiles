@@ -26,10 +26,10 @@ eval "$(starship init zsh)"
 
 # --- Tool Integrations ---
 eval "$(mise activate zsh)"
-eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"              # Ctrl-T (files), Alt-C (cd)
 eval "$(atuin init zsh)"         # Ctrl-R + Up/Down (history) — must be after fzf to take precedence
 eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"        # Must be last — needs to wrap cd after all other inits
 
 # --- History ---
 HISTSIZE=1000000

@@ -48,6 +48,7 @@ if OS.mac?
   cask "itsycal"                   # Menu bar calendar
   cask "orbstack"
   cask "obsidian"
+  cask "raycast"
   cask "cursor"
   cask "brave-browser"
   cask "slack"
