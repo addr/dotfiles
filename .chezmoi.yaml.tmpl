@@ -7,7 +7,9 @@
 {{- $computer_name := default "andyrice-computer-name" (env "CM_computer_name") -}}
 {{- $hostname := default "andyrice" (env "CM_hostname") -}}
 
-{{- if and (not $codespaces) (not $ci) }}
+{{- $interactive := and (not $codespaces) (not $ci) (not (env "CM_name")) -}}
+
+{{- if $interactive }}
 {{-   $computer_name = promptString "Computer Name" $computer_name -}}
 {{-   $hostname = promptString "Hostname" $hostname -}}
 {{-   $name = promptString "Full Name" $name -}}
