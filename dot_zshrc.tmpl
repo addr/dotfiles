@@ -23,7 +23,6 @@ antidote load <<'PLUGINS'
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-history-substring-search
 PLUGINS
 
 # --- Prompt ---
@@ -33,7 +32,7 @@ eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"              # Ctrl-T (files), Alt-C (cd)
-eval "$(atuin init zsh)"         # Ctrl-R (history) — must be after fzf to take precedence
+eval "$(atuin init zsh)"         # Ctrl-R + Up/Down (history) — must be after fzf to take precedence
 eval "$(direnv hook zsh)"
 
 # --- History ---
@@ -46,10 +45,6 @@ setopt SHARE_HISTORY
 
 # --- Keybindings (vi-mode) ---
 bindkey -v
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 # --- Aliases ---
 alias ls="eza --icons"
