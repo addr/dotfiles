@@ -7,6 +7,11 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
+# --- 1Password SSH Agent ---
+{{- if eq .chezmoi.os "darwin" }}
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+{{- end }}
+
 # --- Zinit Bootstrap ---
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [[ ! -d "$ZINIT_HOME" ]]; then
