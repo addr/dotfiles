@@ -42,7 +42,7 @@ if OS.mac?
   cask "ghostty"
   cask "karabiner-elements"
   cask "1password-cli"
-  cask "ice"                       # Menu bar management (replaces hiddenbar)
+  cask "jordanbaird-ice"            # Menu bar management (replaces hiddenbar)
   cask "chatgpt"                   # ChatGPT desktop
   cask "itsycal"                   # Menu bar calendar
   cask "orbstack"
