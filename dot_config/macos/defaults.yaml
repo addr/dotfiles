@@ -27,4 +27,10 @@ NSGlobalDomain:
 
 com.apple.menuextra.clock:
   DateFormat: "EEE d MMM HH:mm:ss"
+  IsAnalog: true
+
+com.mowglii.ItsycalApp:
+  ClockFormat: "E yyyy-MM-dd HH:mm:ss /  'W'w"
+  HideIcon: true
+  ShowEventDays: 7
 

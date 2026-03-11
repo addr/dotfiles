@@ -24,4 +24,12 @@ defaults write -globalDomain NSU
   -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 1572864" \
   -c "Add :AppleSymbolicHotKeys:65:type string standard"
 
+# Analog system clock
+defaults write com.apple.menuextra.clock IsAnalog -bool true
+
+# Itsycal preferences
+defaults write com.mowglii.ItsycalApp ClockFormat -string "E yyyy-MM-dd HH:mm:ss /  'W'w"
+defaults write com.mowglii.ItsycalApp HideIcon -bool true
+defaults write com.mowglii.ItsycalApp ShowEventDays -int 7
+
 {{ end -}}

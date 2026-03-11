@@ -6,7 +6,7 @@
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
 	ignorecase = false
-	editor = code --wait
+	editor = cursor --wait
 	pager = delta
 
 [interactive]
@@ -18,18 +18,21 @@
 	line-numbers = true
 
 [diff]
-	tool = vscode
+	tool = difftastic
 	colorMoved = default
 
-[difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+
+[difftool]
+	prompt = false
 
 [merge]
-	tool = vscode
+	tool = cursor
 	conflictstyle = zdiff3
 
-[mergetool "vscode"]
-	cmd = code --wait $MERGED
+[mergetool "cursor"]
+	cmd = cursor --wait $MERGED
 
 [pull]
 	ff = only
@@ -37,8 +40,15 @@
 [fetch]
 	prune = true
 
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
 [commit]
 	template = ~/.gitmessage
+	gpgsign = true
 
 [include]
 	path = ~/.gitconfig.local
