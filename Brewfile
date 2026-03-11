@@ -35,6 +35,7 @@ brew "dust"           # Disk usage visualization
 brew "lazydocker"     # Docker TUI
 brew "croc"           # P2P encrypted file transfer
 brew "uv"             # Python package manager
+brew "granted"        # AWS SSO credential management
 
 # --- macOS Only ---
 if OS.mac?
