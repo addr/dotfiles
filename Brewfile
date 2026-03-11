@@ -42,9 +42,9 @@ if OS.mac?
   cask "ghostty"
   cask "karabiner-elements"
   cask "1password-cli"
-  cask "hiddenbar"
-  cask "maccy"
-  cask "alt-tab"
+  cask "ice"                       # Menu bar management (replaces hiddenbar)
+  cask "chatgpt"                   # ChatGPT desktop
+  cask "itsycal"                   # Menu bar calendar
   cask "orbstack"
   cask "obsidian"
   cask "cursor"
@@ -53,4 +53,5 @@ if OS.mac?
   cask "spotify"
   cask "discord"
   cask "font-sf-mono-nerd-font"
+  # Paprika Recipe Manager: install from Mac App Store
 end
